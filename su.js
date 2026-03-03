@@ -10,8 +10,10 @@ let state = {
 // INIT
 // ======================
 
-loadFromStorage();
-render();
+document.addEventListener('DOMContentLoaded', function() {
+  loadFromStorage();
+  render();
+});
 
 // ======================
 // TOAST NOTIFICATIONS
