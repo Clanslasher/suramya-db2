@@ -1,24 +1,12 @@
 {
-  "buildCommand": "echo 'No build needed'",
+  "buildCommand": "echo 'Static site - no build needed'",
   "outputDirectory": ".",
-  "env": {
-    "NODE_ENV": "production"
-  },
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=3600"
-        }
-      ]
     }
   ]
 }
