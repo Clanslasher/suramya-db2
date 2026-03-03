@@ -10,35 +10,22 @@ let state = {
 // INIT
 // ======================
 
-function initApp() {
-  console.log('🚀 initApp called');
-  const appEl = document.getElementById('app');
-  const toastEl = document.getElementById('toast');
-  
-  console.log('App element:', appEl);
-  console.log('Toast element:', toastEl);
-  
-  if (!appEl || !toastEl) {
-    console.error('❌ Required DOM elements not found');
-    return;
+console.log('📦 su.js loaded');
+
+function startApp() {
+  console.log('🚀 Starting app...');
+  try {
+    loadFromStorage();
+    render();
+    console.log('✅ App started successfully');
+  } catch (error) {
+    console.error('❌ Error starting app:', error);
   }
-  
-  console.log('✅ DOM elements found, loading data...');
-  loadFromStorage();
-  console.log('✅ Data loaded, rendering...');
-  render();
-  console.log('✅ Render complete');
 }
 
-// Wait a tiny bit to ensure DOM is ready, then init
-console.log('Document ready state:', document.readyState);
-if (document.readyState === 'loading') {
-  console.log('DOM still loading, waiting for DOMContentLoaded...');
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  console.log('DOM already loaded, initializing immediately...');
-  initApp();
-}
+// Start immediately - the script is at the end of body
+console.log('Initializing...');
+startApp();
 
 // ======================
 // TOAST NOTIFICATIONS
