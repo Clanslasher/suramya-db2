@@ -11,22 +11,32 @@ let state = {
 // ======================
 
 function initApp() {
+  console.log('🚀 initApp called');
   const appEl = document.getElementById('app');
   const toastEl = document.getElementById('toast');
   
+  console.log('App element:', appEl);
+  console.log('Toast element:', toastEl);
+  
   if (!appEl || !toastEl) {
-    console.error('Required DOM elements not found');
+    console.error('❌ Required DOM elements not found');
     return;
   }
   
+  console.log('✅ DOM elements found, loading data...');
   loadFromStorage();
+  console.log('✅ Data loaded, rendering...');
   render();
+  console.log('✅ Render complete');
 }
 
 // Wait a tiny bit to ensure DOM is ready, then init
+console.log('Document ready state:', document.readyState);
 if (document.readyState === 'loading') {
+  console.log('DOM still loading, waiting for DOMContentLoaded...');
   document.addEventListener('DOMContentLoaded', initApp);
 } else {
+  console.log('DOM already loaded, initializing immediately...');
   initApp();
 }
 
@@ -220,15 +230,20 @@ function handleSort(e) {
 // ======================
 
 function render() {
+  console.log('📝 render() called');
   const app = document.getElementById("app");
   if (!app) {
-    console.error('App element not found!');
+    console.error('❌ App element not found in render!');
     return;
   }
   
+  console.log('✅ App element found, preparing content...');
   const filtered = getFilteredProducts();
   const stats = getTotalStats();
   const product = state.editingProduct ? state.products.find(p => p.id === state.editingProduct) : null;
+
+  console.log('Stats:', stats);
+  console.log('Filtered products:', filtered);
 
   app.innerHTML = `
     <div class="container">
