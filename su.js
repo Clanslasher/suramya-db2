@@ -10,10 +10,25 @@ let state = {
 // INIT
 // ======================
 
-document.addEventListener('DOMContentLoaded', function() {
+function initApp() {
+  const appEl = document.getElementById('app');
+  const toastEl = document.getElementById('toast');
+  
+  if (!appEl || !toastEl) {
+    console.error('Required DOM elements not found');
+    return;
+  }
+  
   loadFromStorage();
   render();
-});
+}
+
+// Wait a tiny bit to ensure DOM is ready, then init
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 // ======================
 // TOAST NOTIFICATIONS
@@ -206,7 +221,12 @@ function handleSort(e) {
 
 function render() {
   const app = document.getElementById("app");
-              const filtered = getFilteredProducts();
+  if (!app) {
+    console.error('App element not found!');
+    return;
+  }
+  
+  const filtered = getFilteredProducts();
   const stats = getTotalStats();
   const product = state.editingProduct ? state.products.find(p => p.id === state.editingProduct) : null;
 
